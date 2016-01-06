@@ -1,0 +1,6 @@
+--compilers js:babel-register
+--reporter list
+--growl
+--ui bdd
+--inline-diffs
+test/*.js
