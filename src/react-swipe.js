@@ -1,13 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 
 class ReactSwipe extends Component {
-  constructor() {
-    super();
-    this._handleSwipeStart = this._handleSwipeStart.bind(this);
-    this._handleSwipeMove = this._handleSwipeMove.bind(this);
-    this._handleSwipeEnd = this._handleSwipeEnd.bind(this);
-  }
-
   static propTypes = {
     tagName: PropTypes.string,
     className: PropTypes.string,
@@ -31,6 +24,13 @@ class ReactSwipe extends Component {
     onSwipeStart() {},
     onSwipeMove() {},
     onSwipeEnd() {}
+  }
+
+  constructor() {
+    super();
+    this._handleSwipeStart = this._handleSwipeStart.bind(this);
+    this._handleSwipeMove = this._handleSwipeMove.bind(this);
+    this._handleSwipeEnd = this._handleSwipeEnd.bind(this);
   }
 
   _handleSwipeStart(e) {
