@@ -72,7 +72,7 @@ class ReactSwipe extends Component {
 
   render() {
     return (
-      <ul
+      <this.props.tagName
         onTouchMove = { this._handleSwipeMove }
         onTouchStart = { this._handleSwipeStart }
         onTouchEnd = { this._handleSwipeEnd }
@@ -82,7 +82,7 @@ class ReactSwipe extends Component {
 
         { this.props.children }
 
-      </ul>
+      </this.props.tagName>
     );
   }
 }
