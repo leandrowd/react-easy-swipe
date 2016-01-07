@@ -1,10 +1,13 @@
 # REACT EASY SWIPE
 
 Add swipe interactions to your react component.
+* Generated using [react-init](https://www.npmjs.com/package/react-init)
 
 ## Demo
-``
-
+[http://leandrowd.github.io/react-easy-swipe/](http://leandrowd.github.io/react-easy-swipe/)
+- Open your console;
+- Swipe over the content;
+* This is a touch function, so make sure your browser is emulating touch.
 
 ## Instalation
 `npm install react-easy-swipe --save`
@@ -76,7 +79,6 @@ ReactDOM.render(<MyComponent/>, document.getElementById('root'));
 
 Please, feel free to contributing. You may file an issue or submit a pull request!
 
-* Generated using [react-init](https://www.npmjs.com/package/react-init)
 
 ### TODOs
 - [ ] write tests
