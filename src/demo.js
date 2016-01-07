@@ -1,15 +1,17 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Swipe from './react-swipe';
 
+/* eslint no-console: 3*/
 class MyComponent extends Component {
   onSwipeStart() {
+
     console.log('Start swiping...');
   }
 
   onSwipeMove(position) {
-    console.log(`Moved ${position.x} pixels horizontally`);
-    console.log(`Moved ${position.y} pixels vertically`);
+    console.log(`Moved ${ position.x } pixels horizontally`);
+    console.log(`Moved ${ position.y } pixels vertically`);
   }
 
   onSwipeEnd() {
@@ -18,7 +20,7 @@ class MyComponent extends Component {
 
   render() {
     const boxStyle = {
-      width: '80%',
+      width: '100%',
       margin: '20px auto',
       height: '300px',
       border: '1px solid black',
@@ -29,10 +31,10 @@ class MyComponent extends Component {
 
     return (
       <Swipe
-        onSwipeStart={this.onSwipeStart}
-        onSwipeMove={this.onSwipeMove}
-        onSwipeEnd={this.onSwipeEnd}>
-          <div style={boxStyle}>Open the console and swipe me</div>
+        onSwipeStart={ this.onSwipeStart }
+        onSwipeMove={ this.onSwipeMove }
+        onSwipeEnd={ this.onSwipeEnd }>
+          <div style={ boxStyle }>Open the console and swipe me</div>
       </Swipe>
     );
   }

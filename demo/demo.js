@@ -109,7 +109,7 @@ webpackJsonp([0],{
 	      key: 'render',
 	      value: function render() {
 	        var boxStyle = {
-	          width: '80%',
+	          width: '100%',
 	          margin: '20px auto',
 	          height: '300px',
 	          border: '1px solid black',
