@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import Swipe from './react-swipe';
 
-/* eslint no-console: 3*/
+/* eslint no-console: 0*/
 class MyComponent extends Component {
   onSwipeStart() {
 
