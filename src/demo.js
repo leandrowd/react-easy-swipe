@@ -5,7 +5,6 @@ import Swipe from './react-swipe';
 /* eslint no-console: 0*/
 class MyComponent extends Component {
   onSwipeStart() {
-
     console.log('Start swiping...');
   }
 
@@ -33,7 +32,8 @@ class MyComponent extends Component {
       <Swipe
         onSwipeStart={ this.onSwipeStart }
         onSwipeMove={ this.onSwipeMove }
-        onSwipeEnd={ this.onSwipeEnd }>
+        onSwipeEnd={ this.onSwipeEnd }
+      >
           <div style={ boxStyle }>Open the console and swipe me</div>
       </Swipe>
     );
