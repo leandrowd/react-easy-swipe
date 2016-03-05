@@ -59,9 +59,9 @@ class ReactSwipe extends Component {
         this.props.onSwipeRight(1);
       }
       if (this.touchPosition.deltaY < 0) {
-        this.props.onSwipeDown(1);
-      } else if (this.touchPosition.deltaY > 0) {
         this.props.onSwipeUp(1);
+      } else if (this.touchPosition.deltaY > 0) {
+        this.props.onSwipeDown(1);
       }
     }
     this.props.onSwipeEnd();
