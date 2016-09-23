@@ -12,7 +12,8 @@ class ReactSwipe extends Component {
     onSwipeRight: PropTypes.func,
     onSwipeStart: PropTypes.func,
     onSwipeMove: PropTypes.func,
-    onSwipeEnd: PropTypes.func
+    onSwipeEnd: PropTypes.func,
+    direction: PropTypes.oneOf([ReactSwipe.vertical, ReactSwipe.horizontal, ReactSwipe.both]).isRequired
   }
 
   static defaultProps = {
@@ -23,8 +24,21 @@ class ReactSwipe extends Component {
     onSwipeRight() {},
     onSwipeStart() {},
     onSwipeMove() {},
-    onSwipeEnd() {}
+    onSwipeEnd() {},
+    direction: ReactSwipe.both
   }
+  
+  static get vertical(){
+    return 1;
+  }
+  
+  static get horizontal(){
+    return 2;
+  }  
+
+  static get both(){
+    return this.vertical | this.horizontal;
+  }  
 
   constructor() {
     super();
@@ -40,10 +54,12 @@ class ReactSwipe extends Component {
   }
 
   _handleSwipeMove(e) {
-    e.preventDefault();
     const deltaX = e.touches[0].pageX - this.touchStart.pageX;
     const deltaY = e.touches[0].pageY - this.touchStart.pageY;
+    const direction = Math.abs(deltaX) < Math.abs(deltaY) ? ReactSwipe.vertical : ReactSwipe.horizontal;
+    if(0 == (this.props.direction & direction)) return;
     this.swiping = true;
+    e.preventDefault();
     this.props.onSwipeMove({
       x: deltaX,
       y: deltaY
@@ -53,15 +69,19 @@ class ReactSwipe extends Component {
 
   _handleSwipeEnd() {
     if (this.swiping) {
-      if (this.touchPosition.deltaX < 0) {
-        this.props.onSwipeLeft(1);
-      } else if (this.touchPosition.deltaX > 0) {
-        this.props.onSwipeRight(1);
+      if(0 != (this.props.direction & ReactSwipe.horizontal) ) {
+        if (this.touchPosition.deltaX < 0) {
+          this.props.onSwipeLeft(1);
+        } else if (this.touchPosition.deltaX > 0) {
+          this.props.onSwipeRight(1);
+        }
       }
-      if (this.touchPosition.deltaY < 0) {
-        this.props.onSwipeUp(1);
-      } else if (this.touchPosition.deltaY > 0) {
-        this.props.onSwipeDown(1);
+      if(0 != (this.props.direction & ReactSwipe.vertical) ) {
+        if (this.touchPosition.deltaY < 0) {
+          this.props.onSwipeUp(1);
+        } else if (this.touchPosition.deltaY > 0) {
+          this.props.onSwipeDown(1);
+        }
       }
     }
     this.props.onSwipeEnd();
