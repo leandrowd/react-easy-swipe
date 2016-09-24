@@ -23,8 +23,8 @@
     "tdd": "mocha --watch",
     "coverage": "isparta cover _mocha --include-all-sources --report html --report lcovonly",
     "coveralls": "cat coverage/lcov.info | coveralls",
-    "prerelease": "npm test && npm run lint && npm run build",
-    "release": "(git pull origin master && npm version patch && git push origin master && git checkout release && git merge master && git push origin release && git checkout master && npm publish)"
+    "prepublish-to-npm": "git pull && npm run build && git add . && git commit -m 'Prepare for publishing'",
+    "publish-to-npm": "(git pull origin master && npm version patch && git push origin master && npm publish && git push --tags)",
   },
   "author": {
     "name": "Leandro Augusto Lemos",
@@ -55,9 +55,10 @@
     "isparta": "^4.0.0",
     "jsdom": "^7.2.0",
     "mocha": "^2.3.4",
-    "react-addons-test-utils": "^0.14.3",
     "react": "^0.14.3",
+    "react-addons-test-utils": "^0.14.3",
     "react-dom": "^0.14.3",
+    "watch": "^0.19.2",
     "webpack": "^1.12.10"
   },
   "tags": [
