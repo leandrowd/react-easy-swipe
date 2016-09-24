@@ -40,14 +40,21 @@ class ReactSwipe extends Component {
   }
 
   _handleSwipeMove(e) {
-    e.preventDefault();
     const deltaX = e.touches[0].pageX - this.touchStart.pageX;
     const deltaY = e.touches[0].pageY - this.touchStart.pageY;
     this.swiping = true;
-    this.props.onSwipeMove({
+
+    // handling the responsability of cancelling the scroll to
+    // the component handling the event
+    const shouldPreventDefault = this.props.onSwipeMove({
       x: deltaX,
       y: deltaY
     });
+
+    if (shouldPreventDefault) {
+      e.preventDefault();
+    }
+
     this.touchPosition = { deltaX, deltaY };
   }
 

@@ -9,6 +9,7 @@ Add swipe interactions to your react component.
 - Swipe over the content and check your console;
 - This is a touch component so make sure your browser is emulating touch.
 
+Tip: To prevent scroll during swipe, return true from the handler passed to onSwipeMove
 
 ## Instalation
 `npm install react-easy-swipe --save`
