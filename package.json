@@ -24,7 +24,7 @@
     "coverage": "isparta cover _mocha --include-all-sources --report html --report lcovonly",
     "coveralls": "cat coverage/lcov.info | coveralls",
     "prepublish-to-npm": "git pull && npm run build && git add . && git commit -m 'Prepare for publishing'",
-    "publish-to-npm": "(git pull origin master && npm version patch && git push origin master && npm publish && git push --tags)",
+    "publish-to-npm": "(git pull origin master && npm version patch && git push origin master && npm publish && git push --tags)"
   },
   "author": {
     "name": "Leandro Augusto Lemos",

@@ -1,0 +1,47 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/llemos/.nvm/versions/node/v6.4.0/bin/node',
+1 verbose cli   '/Users/llemos/.nvm/versions/node/v6.4.0/bin/npm',
+1 verbose cli   'run',
+1 verbose cli   'publish-to-npm' ]
+2 info using npm@3.10.3
+3 info using node@v6.4.0
+4 verbose run-script [ 'prepublish-to-npm', 'publish-to-npm', 'postpublish-to-npm' ]
+5 info lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: react-easy-swipe@0.0.4
+6 verbose lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: unsafe-perm in lifecycle true
+7 verbose lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: PATH: /Users/llemos/.nvm/versions/node/v6.4.0/lib/node_modules/npm/bin/node-gyp-bin:/Users/llemos/src/personal/react-easy-swipe/node_modules/.bin:/Users/llemos/.nvm/versions/node/v6.4.0/bin:/Users/llemos/.nvm/versions/node/v6.4.0/bin:/Users/llemos/anaconda/bin:/Users/llemos/.rbenv/shims:/Library/PostgreSQL/8.4/bin:/Users/llemos/atlassian/agent-charlie/bin:/Users/llemos/atlassian/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/Users/llemos/atlassian/atlassian-scripts/bin:/Users/llemos/atlassian/atlassian-scripts/bin
+8 verbose lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: CWD: /Users/llemos/src/personal/react-easy-swipe
+9 silly lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: Args: [ '-c',
+9 silly lifecycle   'git pull && npm run build && git add . && git commit -m \'Prepare for publishing\'' ]
+10 silly lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: Returned: code: 1  signal: null
+11 info lifecycle react-easy-swipe@0.0.4~prepublish-to-npm: Failed to exec prepublish-to-npm script
+12 verbose stack Error: react-easy-swipe@0.0.4 prepublish-to-npm: `git pull && npm run build && git add . && git commit -m 'Prepare for publishing'`
+12 verbose stack Exit status 1
+12 verbose stack     at EventEmitter.<anonymous> (/Users/llemos/.nvm/versions/node/v6.4.0/lib/node_modules/npm/lib/utils/lifecycle.js:242:16)
+12 verbose stack     at emitTwo (events.js:106:13)
+12 verbose stack     at EventEmitter.emit (events.js:191:7)
+12 verbose stack     at ChildProcess.<anonymous> (/Users/llemos/.nvm/versions/node/v6.4.0/lib/node_modules/npm/lib/utils/spawn.js:40:14)
+12 verbose stack     at emitTwo (events.js:106:13)
+12 verbose stack     at ChildProcess.emit (events.js:191:7)
+12 verbose stack     at maybeClose (internal/child_process.js:852:16)
+12 verbose stack     at Process.ChildProcess._handle.onexit (internal/child_process.js:215:5)
+13 verbose pkgid react-easy-swipe@0.0.4
+14 verbose cwd /Users/llemos/src/personal/react-easy-swipe
+15 error Darwin 15.4.0
+16 error argv "/Users/llemos/.nvm/versions/node/v6.4.0/bin/node" "/Users/llemos/.nvm/versions/node/v6.4.0/bin/npm" "run" "publish-to-npm"
+17 error node v6.4.0
+18 error npm  v3.10.3
+19 error code ELIFECYCLE
+20 error react-easy-swipe@0.0.4 prepublish-to-npm: `git pull && npm run build && git add . && git commit -m 'Prepare for publishing'`
+20 error Exit status 1
+21 error Failed at the react-easy-swipe@0.0.4 prepublish-to-npm script 'git pull && npm run build && git add . && git commit -m 'Prepare for publishing''.
+21 error Make sure you have the latest version of node.js and npm installed.
+21 error If you do, this is most likely a problem with the react-easy-swipe package,
+21 error not with npm itself.
+21 error Tell the author that this fails on your system:
+21 error     git pull && npm run build && git add . && git commit -m 'Prepare for publishing'
+21 error You can get information on how to open an issue for this project with:
+21 error     npm bugs react-easy-swipe
+21 error Or if that isn't available, you can get their info via:
+21 error     npm owner ls react-easy-swipe
+21 error There is likely additional logging output above.
+22 verbose exit [ 1, true ]
