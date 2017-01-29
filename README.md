@@ -22,17 +22,17 @@ import ReactDOM from 'react-dom';
 import Swipe from './react-swipe';
 
 class MyComponent extends Component {
-  onSwipeStart() {
-    console.log('Start swiping...');
+  onSwipeStart(event) {
+    console.log('Start swiping...', event);
   }
 
-  onSwipeMove(position) {
-    console.log(`Moved ${position.x} pixels horizontally`);
-    console.log(`Moved ${position.y} pixels vertically`);
+  onSwipeMove(position, event) {
+    console.log(`Moved ${position.x} pixels horizontally`, event);
+    console.log(`Moved ${position.y} pixels vertically`, event);
   }
 
-  onSwipeEnd() {
-    console.log('End swiping...');
+  onSwipeEnd(event) {
+    console.log('End swiping...', event);
   }
 
   render() {
