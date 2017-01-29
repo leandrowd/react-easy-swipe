@@ -33,15 +33,15 @@ class ReactSwipe extends Component {
     this._handleSwipeEnd = this._handleSwipeEnd.bind(this);
   }
 
-  _handleSwipeStart(e) {
-    const { pageX, pageY } = e.touches[0];
+  _handleSwipeStart(event) {
+    const { pageX, pageY } = event.touches[0];
     this.touchStart = { pageX, pageY };
-    this.props.onSwipeStart();
+    this.props.onSwipeStart(event);
   }
 
-  _handleSwipeMove(e) {
-    const deltaX = e.touches[0].pageX - this.touchStart.pageX;
-    const deltaY = e.touches[0].pageY - this.touchStart.pageY;
+  _handleSwipeMove(event) {
+    const deltaX = event.touches[0].pageX - this.touchStart.pageX;
+    const deltaY = event.touches[0].pageY - this.touchStart.pageY;
     this.swiping = true;
 
     // handling the responsability of cancelling the scroll to
@@ -49,29 +49,29 @@ class ReactSwipe extends Component {
     const shouldPreventDefault = this.props.onSwipeMove({
       x: deltaX,
       y: deltaY
-    });
+    }, event);
 
     if (shouldPreventDefault) {
-      e.preventDefault();
+      event.preventDefault();
     }
 
     this.touchPosition = { deltaX, deltaY };
   }
 
-  _handleSwipeEnd() {
+  _handleSwipeEnd(event) {
     if (this.swiping) {
       if (this.touchPosition.deltaX < 0) {
-        this.props.onSwipeLeft(1);
+        this.props.onSwipeLeft(1, event);
       } else if (this.touchPosition.deltaX > 0) {
-        this.props.onSwipeRight(1);
+        this.props.onSwipeRight(1, event);
       }
       if (this.touchPosition.deltaY < 0) {
-        this.props.onSwipeUp(1);
+        this.props.onSwipeUp(1, event);
       } else if (this.touchPosition.deltaY > 0) {
-        this.props.onSwipeDown(1);
+        this.props.onSwipeDown(1, event);
       }
     }
-    this.props.onSwipeEnd();
+    this.props.onSwipeEnd(event);
     this.touchStart = null;
     this.swiping = false;
     this.touchPosition = null;
