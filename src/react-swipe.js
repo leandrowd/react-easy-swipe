@@ -6,6 +6,7 @@ class ReactSwipe extends Component {
     className: PropTypes.string,
     style: PropTypes.object,
     children: PropTypes.node,
+    allowMouseEvents: PropTypes.bool,
     onSwipeUp: PropTypes.func,
     onSwipeDown: PropTypes.func,
     onSwipeLeft: PropTypes.func,
@@ -17,6 +18,7 @@ class ReactSwipe extends Component {
 
   static defaultProps = {
     tagName: 'div',
+    allowMouseEvents: false,
     onSwipeUp() {},
     onSwipeDown() {},
     onSwipeLeft() {},
@@ -26,23 +28,58 @@ class ReactSwipe extends Component {
     onSwipeEnd() {}
   }
 
-  constructor() {
-    super();
+  constructor(...args) {
+    super(...args);
     this._handleSwipeStart = this._handleSwipeStart.bind(this);
     this._handleSwipeMove = this._handleSwipeMove.bind(this);
     this._handleSwipeEnd = this._handleSwipeEnd.bind(this);
+
+    this._onMouseDown = this._onMouseDown.bind(this);
+    this._onMouseMove = this._onMouseMove.bind(this);
+    this._onMouseUp = this._onMouseUp.bind(this);
+  }
+
+  _onMouseDown(event) {
+    if (!this.props.allowMouseEvents) {
+      return;
+    }
+
+    this.mouseDown = true;
+
+    document.addEventListener('mouseup', this._onMouseUp);
+    document.addEventListener('mousemove', this._onMouseMove);
+
+    this._handleSwipeStart(event);
+  }
+
+  _onMouseMove(event) {
+    if (!this.mouseDown) {
+      return;
+    }
+
+    this._handleSwipeMove(event);
+  }
+
+  _onMouseUp(event) {
+    this.mouseDown = false;
+
+    document.removeEventListener('mouseup', this._onMouseUp);
+    document.removeEventListener('mousemove', this._onMouseMove);
+
+    this._handleSwipeEnd(event);
   }
 
   _handleSwipeStart(event) {
-    const { pageX, pageY } = event.touches[0];
-    this.touchStart = { pageX, pageY };
+    const { x, y } = getPosition(event);
+    this.moveStart = { x, y };
     this.props.onSwipeStart(event);
   }
 
   _handleSwipeMove(event) {
-    const deltaX = event.touches[0].pageX - this.touchStart.pageX;
-    const deltaY = event.touches[0].pageY - this.touchStart.pageY;
-    this.swiping = true;
+    const { x, y } = getPosition(event);
+    const deltaX = x - this.moveStart.x;
+    const deltaY = y - this.moveStart.y;
+    this.moving = true;
 
     // handling the responsability of cancelling the scroll to
     // the component handling the event
@@ -55,31 +92,34 @@ class ReactSwipe extends Component {
       event.preventDefault();
     }
 
-    this.touchPosition = { deltaX, deltaY };
+    this.movePosition = { deltaX, deltaY };
   }
 
   _handleSwipeEnd(event) {
-    if (this.swiping) {
-      if (this.touchPosition.deltaX < 0) {
+    this.props.onSwipeEnd(event);
+
+    if (this.moving) {
+      if (this.movePosition.deltaX < 0) {
         this.props.onSwipeLeft(1, event);
-      } else if (this.touchPosition.deltaX > 0) {
+      } else if (this.movePosition.deltaX > 0) {
         this.props.onSwipeRight(1, event);
       }
-      if (this.touchPosition.deltaY < 0) {
+      if (this.movePosition.deltaY < 0) {
         this.props.onSwipeUp(1, event);
-      } else if (this.touchPosition.deltaY > 0) {
+      } else if (this.movePosition.deltaY > 0) {
         this.props.onSwipeDown(1, event);
       }
     }
-    this.props.onSwipeEnd(event);
-    this.touchStart = null;
-    this.swiping = false;
-    this.touchPosition = null;
+
+    this.moveStart = null;
+    this.moving = false;
+    this.movePosition = null;
   }
 
   render() {
     return (
       <this.props.tagName
+        onMouseDown = { this._onMouseDown }
         onTouchMove = { this._handleSwipeMove }
         onTouchStart = { this._handleSwipeStart }
         onTouchEnd = { this._handleSwipeEnd }
@@ -97,3 +137,18 @@ class ReactSwipe extends Component {
 ReactSwipe.displayName = 'ReactSwipe';
 
 export default ReactSwipe;
+
+/**
+ * [getPosition returns a position element that works for mouse or touch events]
+ * @param  {[Event]} event [the received event]
+ * @return {[Object]}      [x and y coords]
+ */
+function getPosition(event) {
+  if ('touches' in event) {
+    const { pageX, pageY } = event.touches[0];
+    return { x: pageX, y: pageY };
+  } else {
+    const { screenX, screenY } = event;
+    return { x: screenX, y: screenY };
+  }
+}
