@@ -1,5 +1,20 @@
 import React, { Component, PropTypes } from 'react';
 
+/**
+ * [getPosition returns a position element that works for mouse or touch events]
+ * @param  {[Event]} event [the received event]
+ * @return {[Object]}      [x and y coords]
+ */
+function getPosition(event) {
+  if ('touches' in event) {
+    const { pageX, pageY } = event.touches[0];
+    return { x: pageX, y: pageY };
+  } else {
+    const { screenX, screenY } = event;
+    return { x: screenX, y: screenY };
+  }
+}
+
 class ReactSwipe extends Component {
   static propTypes = {
     tagName: PropTypes.string,
@@ -137,18 +152,3 @@ class ReactSwipe extends Component {
 ReactSwipe.displayName = 'ReactSwipe';
 
 export default ReactSwipe;
-
-/**
- * [getPosition returns a position element that works for mouse or touch events]
- * @param  {[Event]} event [the received event]
- * @return {[Object]}      [x and y coords]
- */
-function getPosition(event) {
-  if ('touches' in event) {
-    const { pageX, pageY } = event.touches[0];
-    return { x: pageX, y: pageY };
-  } else {
-    const { screenX, screenY } = event;
-    return { x: screenX, y: screenY };
-  }
-}
