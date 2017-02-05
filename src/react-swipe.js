@@ -9,10 +9,10 @@ function getPosition(event) {
   if ('touches' in event) {
     const { pageX, pageY } = event.touches[0];
     return { x: pageX, y: pageY };
-  } else {
-    const { screenX, screenY } = event;
-    return { x: screenX, y: screenY };
   }
+
+  const { screenX, screenY } = event;
+  return { x: screenX, y: screenY };
 }
 
 class ReactSwipe extends Component {

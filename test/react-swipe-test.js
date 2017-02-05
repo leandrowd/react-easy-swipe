@@ -1,6 +1,6 @@
 import React from 'react';
 import chai, { expect } from 'chai';
-import chaiEnzyme from 'chai-enzyme'
+import chaiEnzyme from 'chai-enzyme';
 import chaiSinon from 'chai-sinon';
 import ReactSwipe from '../src/react-swipe';
 import { shallow } from 'enzyme';
@@ -27,7 +27,7 @@ describe('react-swipe', () => {
   it('should allow to choose a different tag', () => {
     wrapper.setProps({
       tagName: 'ul'
-    })
+    });
 
     expect(wrapper).to.have.tagName('ul');
   });
@@ -67,10 +67,12 @@ describe('react-swipe', () => {
     context('onSwipeStart', () => {
       let onSwipeStart;
 
-      const event = {touches: [{
-        pageX: 123,
-        pageY: 321
-      }]};
+      const event = {
+        touches: [{
+          pageX: 123,
+          pageY: 321
+        }]
+      };
 
       beforeEach(() => {
         onSwipeStart = sandbox.spy();
@@ -85,22 +87,24 @@ describe('react-swipe', () => {
           x: 123,
           y: 321
         });
-      })
+      });
 
       it('should call props.onSwipeStart with the event', () => {
         instance._handleSwipeStart(event);
 
         expect(onSwipeStart).to.have.been.calledWith(event);
-      })
+      });
     });
 
     context('onSwipeMove', () => {
       let onSwipeMove;
 
-      const event = {touches: [{
-        pageX: 123,
-        pageY: 321
-      }]};
+      const event = {
+        touches: [{
+          pageX: 123,
+          pageY: 321
+        }]
+      };
 
       beforeEach(() => {
         onSwipeMove = sandbox.stub();
@@ -131,16 +135,16 @@ describe('react-swipe', () => {
       it('should call prevent default if the result of onSwipeMove is true', () => {
         const preventDefault = sandbox.spy();
 
-        instance._handleSwipeMove({...event, preventDefault});
+        instance._handleSwipeMove({ ...event, preventDefault });
 
-        expect(preventDefault).to.not.have.been.called;
+        expect(preventDefault).to.have.callCount(0);
 
         onSwipeMove.returns(true);
 
-        instance._handleSwipeMove({...event, preventDefault});
+        instance._handleSwipeMove({ ...event, preventDefault });
 
-        expect(preventDefault).to.have.been.calledOnce;
-      })
+        expect(preventDefault).to.have.callCount(1);
+      });
 
       it('should store the current position', () => {
         instance._handleSwipeMove(event);
@@ -159,10 +163,12 @@ describe('react-swipe', () => {
       let onSwipeUp;
       let onSwipeDown;
 
-      const event = {touches: [{
-        pageX: 123,
-        pageY: 321
-      }]};
+      const event = {
+        touches: [{
+          pageX: 123,
+          pageY: 321
+        }]
+      };
 
       beforeEach(() => {
         onSwipeEnd = sandbox.spy();
@@ -196,41 +202,41 @@ describe('react-swipe', () => {
         instance._handleSwipeEnd(event);
 
         expect(onSwipeEnd).to.have.been.calledWith(event);
-      })
+      });
 
       it('should call onSwipeLeft if deltaX is lower than 0', () => {
         instance.movePosition.deltaX = -10;
         instance._handleSwipeEnd(event);
 
         expect(onSwipeLeft).to.have.been.calledWith(1, event);
-      })
+      });
 
       it('should call onSwipeRight if deltaX is greater than 0', () => {
         instance.movePosition.deltaX = 10;
         instance._handleSwipeEnd(event);
 
         expect(onSwipeRight).to.have.been.calledWith(1, event);
-      })
+      });
 
       it('should call onSwipeUp if deltaY is lower than 0', () => {
         instance.movePosition.deltaY = -10;
         instance._handleSwipeEnd(event);
 
         expect(onSwipeUp).to.have.been.calledWith(1, event);
-      })
+      });
 
       it('should call onSwipeDown if deltaY is greater than 0', () => {
         instance.movePosition.deltaY = 10;
         instance._handleSwipeEnd(event);
 
         expect(onSwipeDown).to.have.been.calledWith(1, event);
-      })
+      });
 
       it('should reset moveStart, moving and movePosition', () => {
         instance._handleSwipeEnd(event);
-        expect(instance.moveStart).to.be.null;
-        expect(instance.moving).to.be.false;
-        expect(instance.movePosition).to.be.null;
+        expect(instance.moveStart).to.be.equal(null);
+        expect(instance.moving).to.be.equal(false);
+        expect(instance.movePosition).to.be.equal(null);
       });
     });
 
@@ -265,7 +271,7 @@ describe('react-swipe', () => {
       context('onMouseDown', () => {
         it('should store mouseDown = true', () => {
           instance._onMouseDown(event);
-          expect(instance.mouseDown).to.be.true;
+          expect(instance.mouseDown).to.be.equal(true);
         });
 
         it('should add event handlers for mouseup and mousemove', () => {
@@ -283,7 +289,7 @@ describe('react-swipe', () => {
       context('onMouseMove', () => {
         it('should call _handleSwipeMove', () => {
           instance._onMouseMove(event);
-          expect(instance._handleSwipeMove).to.not.have.been.called;
+          expect(instance._handleSwipeMove).to.have.callCount(0);
 
           instance.mouseDown = true;
           instance._onMouseMove(event);
@@ -294,7 +300,7 @@ describe('react-swipe', () => {
       context('onMouseUp', () => {
         it('should store mouseDown = false', () => {
           instance._onMouseUp(event);
-          expect(instance.mouseDown).to.be.false;
+          expect(instance.mouseDown).to.be.equal(false);
         });
 
         it('should remove the event handlers for mouseup and mousemove', () => {
