@@ -9,7 +9,11 @@ Add swipe interactions to your react component.
 - Swipe over the content and check your console;
 - This is a touch component so make sure your browser is emulating touch.
 
-Tip: To prevent scroll during swipe, return true from the handler passed to onSwipeMove
+## Tips:
+
+1) To prevent scroll during swipe, return true from the handler passed to onSwipeMove
+
+2) To allow mouse events to behave like touch, pass a prop allowMouseEvents
 
 ## Instalation
 `npm install react-easy-swipe --save`
@@ -68,6 +72,7 @@ ReactDOM.render(<MyComponent/>, document.getElementById('root'));
   className: PropTypes.string,
   style: PropTypes.object,
   children: PropTypes.node,
+  allowMouseEvents: PropTypes.bool,
   onSwipeUp: PropTypes.func,
   onSwipeDown: PropTypes.func,
   onSwipeLeft: PropTypes.func,
@@ -81,8 +86,3 @@ ReactDOM.render(<MyComponent/>, document.getElementById('root'));
 ## Contributing
 
 Please, feel free to contribute. You may open a bug, request a feature, submit a pull request or whatever you want!
-
-
-### TODOs
-- [ ] write tests
-- [ ] write docs
