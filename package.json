@@ -81,5 +81,8 @@
     "Mobile",
     "Swipe",
     "Touch"
-  ]
+  ],
+  "dependencies": {
+    "prop-types": "^15.5.8"
+  }
 }
