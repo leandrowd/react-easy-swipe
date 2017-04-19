@@ -4,7 +4,7 @@
   "description": "React easy swipe - Easy handler for common touch operations",
   "main": "./lib/index.js",
   "engines": {
-    "node": ">= 5.2.0"
+    "node": ">= 6.9.5"
   },
   "repository": {
     "type": "git",
