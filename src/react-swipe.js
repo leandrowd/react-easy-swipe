@@ -17,6 +17,9 @@ function getPosition(event) {
 }
 
 class ReactSwipe extends Component {
+
+  static displayName = 'ReactSwipe';
+
   static propTypes = {
     tagName: PropTypes.string,
     className: PropTypes.string,
@@ -30,7 +33,7 @@ class ReactSwipe extends Component {
     onSwipeStart: PropTypes.func,
     onSwipeMove: PropTypes.func,
     onSwipeEnd: PropTypes.func
-  }
+  };
 
   static defaultProps = {
     tagName: 'div',
@@ -42,7 +45,7 @@ class ReactSwipe extends Component {
     onSwipeStart() {},
     onSwipeMove() {},
     onSwipeEnd() {}
-  }
+  };
 
   constructor(...args) {
     super(...args);
@@ -149,7 +152,5 @@ class ReactSwipe extends Component {
     );
   }
 }
-
-ReactSwipe.displayName = 'ReactSwipe';
 
 export default ReactSwipe;
