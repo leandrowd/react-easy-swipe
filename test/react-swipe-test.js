@@ -2,7 +2,7 @@ import React from 'react';
 import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import chaiSinon from 'chai-sinon';
-import ReactSwipe from '../src/react-swipe';
+import ReactSwipe, { setHasSupportToCaptureOption } from '../src/react-swipe';
 import { shallow } from 'enzyme';
 import sinon from 'sinon';
 
@@ -51,8 +51,26 @@ describe('react-swipe', () => {
     expect(wrapper).to.have.prop('onMouseDown', instance._onMouseDown);
   });
 
-  it('should attach a handler for onTouchMove', () => {
-    expect(wrapper).to.have.prop('onTouchMove', instance._handleSwipeMove);
+  it('should attach a handler for onTouchMove on componentDidMount, using a cross browser passive: false', () => {
+
+    setHasSupportToCaptureOption(false);
+
+    instance.swiper = {
+      addEventListener: sandbox.spy()
+    };
+
+    instance.componentDidMount();
+
+    expect(instance.swiper.addEventListener).to.have.callCount(1);
+    expect(instance.swiper.addEventListener).to.have.been.calledWith('touchmove', instance._handleSwipeMove, true);
+
+    setHasSupportToCaptureOption(true);
+    instance.componentDidMount();
+
+    expect(instance.swiper.addEventListener).to.have.been.calledWith('touchmove', instance._handleSwipeMove, {
+      capture: true,
+      passive: false
+    });
   });
 
   it('should attach a handler for onTouchStart', () => {

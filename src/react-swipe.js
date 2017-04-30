@@ -1,6 +1,21 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+let supportsCaptureOption = false;
+export function setHasSupportToCaptureOption(hasSupport) {
+  supportsCaptureOption = hasSupport;
+}
+
+try {
+  addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
+    setHasSupportToCaptureOption(true);
+  }}));
+} catch(e) {}
+
+function getSafeEventHandlerOpts(options = { capture: true }) {
+  return supportsCaptureOption ? options : options.capture;
+}
+
 /**
  * [getPosition returns a position element that works for mouse or touch events]
  * @param  {[Event]} event [the received event]
@@ -56,6 +71,24 @@ class ReactSwipe extends Component {
     this._onMouseDown = this._onMouseDown.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
     this._onMouseUp = this._onMouseUp.bind(this);
+  }
+
+  componentDidMount() {
+    if (this.swiper) {
+      this.swiper.addEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts({
+        capture: true,
+        passive: false
+      }));
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.swiper) {
+      this.swiper.removeEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts({
+        capture: true,
+        passive: false
+      }));
+    }
   }
 
   _onMouseDown(event) {
@@ -138,12 +171,12 @@ class ReactSwipe extends Component {
   render() {
     return (
       <this.props.tagName
-        onMouseDown = { this._onMouseDown }
-        onTouchMove = { this._handleSwipeMove }
-        onTouchStart = { this._handleSwipeStart }
-        onTouchEnd = { this._handleSwipeEnd }
-        className = { this.props.className }
-        style = { this.props.style }
+        ref={node => this.swiper = node}
+        onMouseDown={ this._onMouseDown }
+        onTouchStart={ this._handleSwipeStart }
+        onTouchEnd={ this._handleSwipeEnd }
+        className={ this.props.className }
+        style={ this.props.style }
       >
 
         { this.props.children }
