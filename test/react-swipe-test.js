@@ -222,33 +222,76 @@ describe('react-swipe', () => {
         expect(onSwipeEnd).to.have.been.calledWith(event);
       });
 
-      it('should call onSwipeLeft if deltaX is lower than 0', () => {
-        instance.movePosition.deltaX = -10;
-        instance._handleSwipeEnd(event);
+      describe('Tolerance', () => {
+        const tolerances = [0, 10, 20];
 
-        expect(onSwipeLeft).to.have.been.calledWith(1, event);
-      });
+        tolerances.forEach((tolerance) => {
+          describe(`${tolerance}`, () => {
+            beforeEach(() => {
+              wrapper.setProps({
+                tolerance
+              });
+            });
 
-      it('should call onSwipeRight if deltaX is greater than 0', () => {
-        instance.movePosition.deltaX = 10;
-        instance._handleSwipeEnd(event);
+            it(`should call onSwipeLeft if deltaX is lower than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaX = - (tolerance + 1);
+              instance._handleSwipeEnd(event);
 
-        expect(onSwipeRight).to.have.been.calledWith(1, event);
-      });
+              expect(onSwipeLeft).to.have.been.calledWith(1, event);
+            });
 
-      it('should call onSwipeUp if deltaY is lower than 0', () => {
-        instance.movePosition.deltaY = -10;
-        instance._handleSwipeEnd(event);
+            it(`should call onSwipeRight if deltaX is greater than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaX =  (tolerance + 1);
+              instance._handleSwipeEnd(event);
 
-        expect(onSwipeUp).to.have.been.calledWith(1, event);
-      });
+              expect(onSwipeRight).to.have.been.calledWith(1, event);
+            });
 
-      it('should call onSwipeDown if deltaY is greater than 0', () => {
-        instance.movePosition.deltaY = 10;
-        instance._handleSwipeEnd(event);
+            it(`should call onSwipeUp if deltaY is lower than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaY = - (tolerance + 1);
+              instance._handleSwipeEnd(event);
 
-        expect(onSwipeDown).to.have.been.calledWith(1, event);
-      });
+              expect(onSwipeUp).to.have.been.calledWith(1, event);
+            });
+
+            it(`should call onSwipeDown if deltaY is greater than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaY =  (tolerance + 1);
+              instance._handleSwipeEnd(event);
+
+              expect(onSwipeDown).to.have.been.calledWith(1, event);
+            });
+
+            it(`should not call onSwipeLeft if deltaX is lower than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaX = -tolerance;
+              instance._handleSwipeEnd(event);
+
+              expect(onSwipeLeft).to.have.callCount(0);
+            });
+
+            it(`should not call onSwipeRight if deltaX is greater than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaX = tolerance;
+              instance._handleSwipeEnd(event);
+
+              expect(onSwipeRight).to.have.callCount(0);
+            });
+
+            it(`should not call onSwipeUp if deltaY is lower than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaY = -tolerance;
+              instance._handleSwipeEnd(event);
+
+              expect(onSwipeUp).to.have.callCount(0);
+            });
+
+            it(`should not call onSwipeDown if deltaY is greater than the tolerance of ${tolerance}`, () => {
+              instance.movePosition.deltaY = tolerance;
+              instance._handleSwipeEnd(event);
+
+              expect(onSwipeDown).to.have.callCount(0);
+            });
+          });
+        });
+      })
+
 
       it('should reset moveStart, moving and movePosition', () => {
         instance._handleSwipeEnd(event);

@@ -47,7 +47,8 @@ class ReactSwipe extends Component {
     onSwipeRight: PropTypes.func,
     onSwipeStart: PropTypes.func,
     onSwipeMove: PropTypes.func,
-    onSwipeEnd: PropTypes.func
+    onSwipeEnd: PropTypes.func,
+    tolerance: PropTypes.number.isRequired
   };
 
   static defaultProps = {
@@ -59,7 +60,8 @@ class ReactSwipe extends Component {
     onSwipeRight() {},
     onSwipeStart() {},
     onSwipeMove() {},
-    onSwipeEnd() {}
+    onSwipeEnd() {},
+    tolerance: 0
   };
 
   constructor(...args) {
@@ -150,15 +152,17 @@ class ReactSwipe extends Component {
   _handleSwipeEnd(event) {
     this.props.onSwipeEnd(event);
 
+    const { tolerance } = this.props;
+
     if (this.moving) {
-      if (this.movePosition.deltaX < 0) {
+      if (this.movePosition.deltaX < -tolerance) {
         this.props.onSwipeLeft(1, event);
-      } else if (this.movePosition.deltaX > 0) {
+      } else if (this.movePosition.deltaX > tolerance) {
         this.props.onSwipeRight(1, event);
       }
-      if (this.movePosition.deltaY < 0) {
+      if (this.movePosition.deltaY < -tolerance) {
         this.props.onSwipeUp(1, event);
-      } else if (this.movePosition.deltaY > 0) {
+      } else if (this.movePosition.deltaY > tolerance) {
         this.props.onSwipeDown(1, event);
       }
     }
