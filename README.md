@@ -1,4 +1,6 @@
 # REACT EASY SWIPE
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fleandrowd%2Freact-easy-swipe.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fleandrowd%2Freact-easy-swipe?ref=badge_shield)
+
 
 Add swipe interactions to your react component.
 * Generated using [react-init](https://www.npmjs.com/package/react-init)
@@ -86,3 +88,7 @@ ReactDOM.render(<MyComponent/>, document.getElementById('root'));
 ## Contributing
 
 Please, feel free to contribute. You may open a bug, request a feature, submit a pull request or whatever you want!
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fleandrowd%2Freact-easy-swipe.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fleandrowd%2Freact-easy-swipe?ref=badge_large)
