@@ -130,6 +130,10 @@ class ReactSwipe extends Component {
   }
 
   _handleSwipeMove(event) {
+    if (!this.moveStart) {
+        return;
+    }
+
     const { x, y } = getPosition(event);
     const deltaX = x - this.moveStart.x;
     const deltaY = y - this.moveStart.y;
