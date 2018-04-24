@@ -25,7 +25,7 @@ Add swipe interactions to your react component.
 ```javascript
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-import Swipe from './react-swipe';
+import Swipe from './react-easy-swipe';
 
 class MyComponent extends Component {
   onSwipeStart(event) {
