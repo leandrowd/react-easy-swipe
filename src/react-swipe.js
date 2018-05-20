@@ -157,7 +157,7 @@ class ReactSwipe extends Component {
 
     const { tolerance } = this.props;
 
-    if (this.moving) {
+    if (this.moving && this.movePosition) {
       if (this.movePosition.deltaX < -tolerance) {
         this.props.onSwipeLeft(1, event);
       } else if (this.movePosition.deltaX > tolerance) {
