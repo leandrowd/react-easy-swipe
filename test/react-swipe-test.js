@@ -47,12 +47,18 @@ describe('react-swipe', () => {
     expect(wrapper).to.have.prop('className', 'mySwiper');
   });
 
+  it('should pass additional attributes down to component', () => {
+    wrapper.setProps({ alt: 'alt text', 'data-index': '1' });
+
+    expect(wrapper).to.have.prop('alt', 'alt text');
+    expect(wrapper).to.have.prop('data-index', '1');
+  });
+
   it('should attach a handler for onMouseDown', () => {
     expect(wrapper).to.have.prop('onMouseDown', instance._onMouseDown);
   });
 
   it('should attach a handler for onTouchMove on componentDidMount, using a cross browser passive: false', () => {
-
     setHasSupportToCaptureOption(false);
 
     instance.swiper = {
