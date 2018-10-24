@@ -176,17 +176,33 @@ class ReactSwipe extends Component {
   }
 
   render() {
+    const { tagName,
+      className,
+      style,
+      children,
+      allowMouseEvents,
+      onSwipeUp,
+      onSwipeDown,
+      onSwipeLeft,
+      onSwipeRight,
+      onSwipeStart,
+      onSwipeMove,
+      onSwipeEnd,
+      ...props
+    } = this.props;
+
     return (
       <this.props.tagName
         ref={node => this.swiper = node}
         onMouseDown={ this._onMouseDown }
         onTouchStart={ this._handleSwipeStart }
         onTouchEnd={ this._handleSwipeEnd }
-        className={ this.props.className }
-        style={ this.props.style }
+        className={ className }
+        style={ style }
+        { ...props }
       >
 
-        { this.props.children }
+        { children }
 
       </this.props.tagName>
     );
