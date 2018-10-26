@@ -7,10 +7,12 @@ export function setHasSupportToCaptureOption(hasSupport) {
 }
 
 try {
-  addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
+  addEventListener('test', null, Object.defineProperty({}, 'capture', { get() {
     setHasSupportToCaptureOption(true);
-  }}));
-} catch(e) {}
+  } }));
+} catch (e) {
+  console.log(e);
+}
 
 function getSafeEventHandlerOpts(options = { capture: true }) {
   return supportsCaptureOption ? options : options.capture;

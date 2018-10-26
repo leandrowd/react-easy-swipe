@@ -247,7 +247,7 @@ describe('react-swipe', () => {
             });
 
             it(`should call onSwipeRight if deltaX is greater than the tolerance of ${tolerance}`, () => {
-              instance.movePosition.deltaX =  (tolerance + 1);
+              instance.movePosition.deltaX = (tolerance + 1);
               instance._handleSwipeEnd(event);
 
               expect(onSwipeRight).to.have.been.calledWith(1, event);
@@ -261,7 +261,7 @@ describe('react-swipe', () => {
             });
 
             it(`should call onSwipeDown if deltaY is greater than the tolerance of ${tolerance}`, () => {
-              instance.movePosition.deltaY =  (tolerance + 1);
+              instance.movePosition.deltaY = (tolerance + 1);
               instance._handleSwipeEnd(event);
 
               expect(onSwipeDown).to.have.been.calledWith(1, event);
@@ -296,7 +296,7 @@ describe('react-swipe', () => {
             });
           });
         });
-      })
+      });
 
 
       it('should reset moveStart, moving and movePosition', () => {

@@ -35,6 +35,7 @@
     "babel-eslint": "^4.1.6",
     "babel-loader": "^6.2.1",
     "babel-plugin-transform-es2015-modules-umd": "^6.3.13",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.19",
     "babel-preset-es2015": "^6.3.13",
     "babel-preset-react": "^6.3.13",
     "babel-preset-stage-1": "^6.3.13",
@@ -82,7 +83,8 @@
     "Swipe",
     "Touch"
   ],
-  "dependencies": {
+  "peerDependencies": {
+    "react": "^15.5.4",
     "prop-types": "^15.5.8"
   }
 }
