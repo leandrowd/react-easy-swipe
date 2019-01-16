@@ -197,6 +197,8 @@ class ReactSwipe extends Component {
       onSwipeStart,
       onSwipeMove,
       onSwipeEnd,
+      innerRef,
+      tolerance,
       ...props
     } = this.props;
 
