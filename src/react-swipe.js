@@ -7,10 +7,10 @@ export function setHasSupportToCaptureOption(hasSupport) {
 }
 
 try {
-  addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
+  addEventListener('test', null, Object.defineProperty({}, 'capture', { get: function get() {
     setHasSupportToCaptureOption(true);
-  }}));
-} catch(e) {}
+  } }));
+} catch (e) {} // eslint-disable-line no-empty
 
 function getSafeEventHandlerOpts(options = { capture: true }) {
   return supportsCaptureOption ? options : options.capture;
