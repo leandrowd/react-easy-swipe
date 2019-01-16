@@ -3,8 +3,9 @@ import chai, { expect } from 'chai';
 import chaiEnzyme from 'chai-enzyme';
 import chaiSinon from 'chai-sinon';
 import ReactSwipe, { setHasSupportToCaptureOption } from '../src/react-swipe';
-import { shallow } from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
+import jsdom from 'jsdom';
 
 chai.use(chaiEnzyme());
 chai.use(chaiSinon);
@@ -296,8 +297,7 @@ describe('react-swipe', () => {
             });
           });
         });
-      })
-
+      });
 
       it('should reset moveStart, moving and movePosition', () => {
         instance._handleSwipeEnd(event);
@@ -380,6 +380,29 @@ describe('react-swipe', () => {
           instance._onMouseUp(event);
           expect(instance._handleSwipeEnd).to.have.been.calledWith(event);
         });
+      });
+    });
+
+    context('passing ref', () => {
+      let node;
+
+      function forwardedRef(ref) {
+        node = ref;
+      }
+
+      const doc = jsdom.jsdom('<!doctype html><html><body></body></html>');
+      global.document = doc;
+      global.window = doc.defaultView;
+
+      const mounted = mount(<ReactSwipe innerRef={forwardedRef} />);
+      const mountedInstance = mounted.instance();
+
+      it('should pass innerRef prop', () => {
+        expect(mounted).to.have.prop('innerRef', forwardedRef);
+      });
+
+      it('should forwards ref', () => {
+        expect(node).to.be.equal(mountedInstance.swiper);
       });
     });
   });
