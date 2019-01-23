@@ -7,10 +7,10 @@ export function setHasSupportToCaptureOption(hasSupport) {
 }
 
 try {
-  addEventListener("test", null, Object.defineProperty({}, 'capture', {get: function () {
+  addEventListener('test', null, Object.defineProperty({}, 'capture', { get: function get() {
     setHasSupportToCaptureOption(true);
-  }}));
-} catch(e) {}
+  } }));
+} catch (e) {} // eslint-disable-line no-empty
 
 function getSafeEventHandlerOpts(options = { capture: true }) {
   return supportsCaptureOption ? options : options.capture;
@@ -48,6 +48,7 @@ class ReactSwipe extends Component {
     onSwipeStart: PropTypes.func,
     onSwipeMove: PropTypes.func,
     onSwipeEnd: PropTypes.func,
+    innerRef: PropTypes.func,
     tolerance: PropTypes.number.isRequired
   };
 
@@ -61,6 +62,7 @@ class ReactSwipe extends Component {
     onSwipeStart() {},
     onSwipeMove() {},
     onSwipeEnd() {},
+    innerRef() {},
     tolerance: 0
   };
 
@@ -73,6 +75,8 @@ class ReactSwipe extends Component {
     this._onMouseDown = this._onMouseDown.bind(this);
     this._onMouseMove = this._onMouseMove.bind(this);
     this._onMouseUp = this._onMouseUp.bind(this);
+
+    this._setSwiperRef = this._setSwiperRef.bind(this);
   }
 
   componentDidMount() {
@@ -175,6 +179,11 @@ class ReactSwipe extends Component {
     this.movePosition = null;
   }
 
+  _setSwiperRef(node) {
+    this.swiper = node;
+    this.props.innerRef(node);
+  }
+
   render() {
     const { tagName,
       className,
@@ -188,12 +197,14 @@ class ReactSwipe extends Component {
       onSwipeStart,
       onSwipeMove,
       onSwipeEnd,
+      innerRef,
+      tolerance,
       ...props
     } = this.props;
 
     return (
       <this.props.tagName
-        ref={node => this.swiper = node}
+        ref={ this._setSwiperRef }
         onMouseDown={ this._onMouseDown }
         onTouchStart={ this._handleSwipeStart }
         onTouchEnd={ this._handleSwipeEnd }
