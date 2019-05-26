@@ -17,6 +17,8 @@ Add swipe interactions to your react component.
 
 2) To allow mouse events to behave like touch, pass a prop allowMouseEvents
 
+3) To prevent accidental swipes on scroll, pass a prop tolerance with the tolerance pixel as number.
+
 ## Instalation
 `npm install react-easy-swipe --save`
 
@@ -81,7 +83,8 @@ ReactDOM.render(<MyComponent/>, document.getElementById('root'));
   onSwipeRight: PropTypes.func,
   onSwipeStart: PropTypes.func,
   onSwipeMove: PropTypes.func,
-  onSwipeEnd: PropTypes.func
+  onSwipeEnd: PropTypes.func,
+  tolerance: PropTypes.number.isRequired
 }
 ```
 
