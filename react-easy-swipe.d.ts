@@ -6,7 +6,7 @@ export interface SwipePosition {
   y: number;
 }
 
-export type SwipeEvent = TouchEvent | MouseEvent;
+export type SwipeEvent = React.TouchEvent | React.MouseEvent;
 
 interface SwipeProps {
   tagName?: string;
