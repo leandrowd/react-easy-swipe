@@ -128,7 +128,8 @@ describe('react-swipe', () => {
         touches: [{
           pageX: 123,
           pageY: 321
-        }]
+        }],
+        cancelable: true
       };
 
       beforeEach(() => {
@@ -157,18 +158,33 @@ describe('react-swipe', () => {
         }, event);
       });
 
-      it('should call prevent default if the result of onSwipeMove is true', () => {
+      it('should call prevent default, if the result of onSwipeMove and event.cancelable is true', () => {
         const preventDefault = sandbox.spy();
-
+        
         instance._handleSwipeMove({ ...event, preventDefault });
 
         expect(preventDefault).to.have.callCount(0);
 
         onSwipeMove.returns(true);
 
+        expect(event.cancelable).to.be.true;
+        instance._handleSwipeMove({ ...event, preventDefault });
+        expect(preventDefault).to.have.callCount(1);
+      });
+
+      it('should *not* call prevent default, if the result of onSwipeMove and event.cancelable is false', () => {
+        const preventDefault = sandbox.spy();
+        event.cancelable = false;
+        
         instance._handleSwipeMove({ ...event, preventDefault });
 
-        expect(preventDefault).to.have.callCount(1);
+        expect(preventDefault).to.have.callCount(0);
+
+        onSwipeMove.returns(false);
+
+        expect(event.cancelable).to.be.false;
+        instance._handleSwipeMove({ ...event, preventDefault });
+        expect(preventDefault).to.have.callCount(0);
       });
 
       it('should store the current position', () => {
