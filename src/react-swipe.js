@@ -149,7 +149,7 @@ class ReactSwipe extends Component {
       y: deltaY
     }, event);
 
-    if (shouldPreventDefault) {
+    if (shouldPreventDefault && event.cancelable) {
       event.preventDefault();
     }
 
