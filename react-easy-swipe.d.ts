@@ -11,8 +11,7 @@ export type SwipeEvent = React.TouchEvent | React.MouseEvent;
 interface SwipeProps {
   tagName?: string;
   className?: string;
-  style?: React.CSSProperties;
-  children?: JSX.Element;
+  style?: React.CSSProperties;  
   allowMouseEvents?: boolean;
   onSwipeUp?: (trigger: 1) => void;
   onSwipeDown?: (trigger: 1) => void;
