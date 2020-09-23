@@ -160,14 +160,14 @@ describe('react-swipe', () => {
 
       it('should call prevent default, if the result of onSwipeMove and event.cancelable is true', () => {
         const preventDefault = sandbox.spy();
-        
+
         instance._handleSwipeMove({ ...event, preventDefault });
 
         expect(preventDefault).to.have.callCount(0);
 
         onSwipeMove.returns(true);
 
-        expect(event.cancelable).to.be.true;
+        expect(event.cancelable).to.equal(true);
         instance._handleSwipeMove({ ...event, preventDefault });
         expect(preventDefault).to.have.callCount(1);
       });
@@ -175,14 +175,14 @@ describe('react-swipe', () => {
       it('should *not* call prevent default, if the result of onSwipeMove and event.cancelable is false', () => {
         const preventDefault = sandbox.spy();
         event.cancelable = false;
-        
+
         instance._handleSwipeMove({ ...event, preventDefault });
 
         expect(preventDefault).to.have.callCount(0);
 
         onSwipeMove.returns(false);
 
-        expect(event.cancelable).to.be.false;
+        expect(event.cancelable).to.equal(false);
         instance._handleSwipeMove({ ...event, preventDefault });
         expect(preventDefault).to.have.callCount(0);
       });
