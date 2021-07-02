@@ -13,7 +13,7 @@ try {
 } catch (e) {} // eslint-disable-line no-empty
 
 function getSafeEventHandlerOpts(options = { capture: true }) {
-  return supportsCaptureOption ? options : options.capture;
+  return supportsCaptureOption ? options : false;
 }
 
 /**
