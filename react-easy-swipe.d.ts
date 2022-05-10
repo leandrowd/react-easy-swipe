@@ -24,4 +24,4 @@ interface SwipeProps {
   tolerance?: number
 }
 
-export default class Swipe extends React.Component<SwipeProps> {}
+export default class Swipe extends React.Component<React.PropsWithChildren<SwipeProps>> {}
