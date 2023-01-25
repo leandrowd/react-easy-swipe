@@ -1,6 +1,6 @@
 {
   "name": "react-easy-swipe",
-  "version": "0.0.22",
+  "version": "0.0.23",
   "description": "React easy swipe - Easy handler for common touch operations",
   "main": "./lib/index.js",
   "types": "./react-easy-swipe.d.ts",
