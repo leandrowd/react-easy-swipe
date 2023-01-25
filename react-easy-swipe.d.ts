@@ -21,7 +21,8 @@ interface SwipeProps {
   onSwipeMove?: (position: SwipePosition, e: SwipeEvent) => void;
   onSwipeEnd?: (e: SwipeEvent) => void;
   innerRef?: (node: any) => void;
-  tolerance?: number
+  tolerance?: number;
+  children?: React.ReactNode
 }
 
 export default class Swipe extends React.Component<SwipeProps> {}
