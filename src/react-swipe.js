@@ -49,7 +49,11 @@ class ReactSwipe extends Component {
     onSwipeMove: PropTypes.func,
     onSwipeEnd: PropTypes.func,
     innerRef: PropTypes.func,
-    tolerance: PropTypes.number.isRequired
+    tolerance: PropTypes.number.isRequired,
+    eventOptions: PropTypes.oneOfType([
+      PropTypes.object,
+      PropTypes.bool
+    ])
   };
 
   static defaultProps = {
@@ -63,7 +67,8 @@ class ReactSwipe extends Component {
     onSwipeMove() {},
     onSwipeEnd() {},
     innerRef() {},
-    tolerance: 0
+    tolerance: 0,
+    eventOptions: { capture: true, passive: false }
   };
 
   constructor(...args) {
@@ -81,19 +86,13 @@ class ReactSwipe extends Component {
 
   componentDidMount() {
     if (this.swiper) {
-      this.swiper.addEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts({
-        capture: true,
-        passive: false
-      }));
+      this.swiper.addEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts(this.props.eventOptions));
     }
   }
 
   componentWillUnmount() {
     if (this.swiper) {
-      this.swiper.removeEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts({
-        capture: true,
-        passive: false
-      }));
+      this.swiper.removeEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts(this.props.eventOptions));
     }
   }
 
