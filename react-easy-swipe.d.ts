@@ -23,6 +23,7 @@ interface SwipeProps {
   innerRef?: (node: any) => void;
   tolerance?: number;
   children?: React.ReactNode
+  eventOptions?: AddEventListenerOptions | boolean;
 }
 
 export default class Swipe extends React.Component<SwipeProps> {}
