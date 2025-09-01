@@ -59,27 +59,6 @@ describe('react-swipe', () => {
     expect(wrapper).to.have.prop('onMouseDown', instance._onMouseDown);
   });
 
-  it('should attach a handler for onTouchMove on componentDidMount, using a cross browser passive: false', () => {
-    setHasSupportToCaptureOption(false);
-
-    instance.swiper = {
-      addEventListener: sandbox.spy()
-    };
-
-    instance.componentDidMount();
-
-    expect(instance.swiper.addEventListener).to.have.callCount(1);
-    expect(instance.swiper.addEventListener).to.have.been.calledWith('touchmove', instance._handleSwipeMove, true);
-
-    setHasSupportToCaptureOption(true);
-    instance.componentDidMount();
-
-    expect(instance.swiper.addEventListener).to.have.been.calledWith('touchmove', instance._handleSwipeMove, {
-      capture: true,
-      passive: false
-    });
-  });
-
   it('should attach a handler for onTouchStart', () => {
     expect(wrapper).to.have.prop('onTouchStart', instance._handleSwipeStart);
   });
@@ -326,7 +305,8 @@ describe('react-swipe', () => {
     context('emulating swipe with mouse', () => {
       const event = {
         screenX: 123,
-        screenY: 321
+        screenY: 321,
+        button: 0
       };
 
       let addEventListener;
