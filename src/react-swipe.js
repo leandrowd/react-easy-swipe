@@ -81,6 +81,7 @@ class ReactSwipe extends Component {
 
   componentDidMount() {
     if (this.swiper) {
+      console.log('Component did mount');
       this.swiper.addEventListener('touchmove', this._handleSwipeMove, getSafeEventHandlerOpts({
         capture: true,
         passive: false
@@ -99,6 +100,10 @@ class ReactSwipe extends Component {
 
   _onMouseDown(event) {
     if (!this.props.allowMouseEvents) {
+      return;
+    }
+    // Only respond to left mouse button
+    if (event.button !== 0) {
       return;
     }
 
